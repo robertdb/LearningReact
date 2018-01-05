@@ -69,7 +69,7 @@ class ArtistsPanel extends React.Component {
     }
     let loadMore;
     if (total > artists.length) {
-      loadMore = (
+      loadMore = (this.state.fetching)? null:(
         <div className="loadMoreLayout">
           <LoadMore
             handleLoadMoreChange={this.handleLoadMoreChange}
@@ -85,7 +85,6 @@ class ArtistsPanel extends React.Component {
         />
         {response}
         {loadMore}
-
       </div>
 
     );
