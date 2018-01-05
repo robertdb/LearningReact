@@ -29,7 +29,6 @@ class ArtistsPanel extends React.Component {
         artists: [],
         total:0
       });
-      return;
     }
 
     this.setState({ fetching: true });
@@ -47,8 +46,9 @@ class ArtistsPanel extends React.Component {
     this.handleFetch(this.state.searchText,true);
   }
   handleSearchTextChange(searchText) {
-    this.setState({ searchText });
-    this.handleFetch(searchText,false);
+    let newSearch = (searchText !== this.state.searchText);
+    this.setState({ searchText: searchText});
+    this.handleFetch(searchText,newSearch);
   }
 
   render() {
