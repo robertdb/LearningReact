@@ -58,15 +58,6 @@ class ArtistsPanel extends React.Component {
     if (this.state.fetching) {
       response = (<Loading />);
     }
-    else {
-      response = <ArtistsList
-        artists={artists}
-        artistTotal={total}
-        selectedArtists={this.props.selectedArtists}
-        onSelectArtist={this.props.onSelectArtist}
-      />;
-
-    }
     let loadMore;
     if (total > artists.length) {
       loadMore = (this.state.fetching)? null:(
@@ -84,6 +75,12 @@ class ArtistsPanel extends React.Component {
           onChange={this.handleSearchTextChange}
         />
         {response}
+        <ArtistsList
+          artists={artists}
+          artistTotal={this.state.total}
+          selectedArtists={this.props.selectedArtists}
+          onSelectArtist={this.props.onSelectArtist}
+        />
         {loadMore}
       </div>
 
