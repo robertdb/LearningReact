@@ -4,6 +4,7 @@ import SearchInput from './SearchInput';
 import ArtistsList  from './ArtistsList';
 import Loading  from './Loading';
 import LoadMore  from './LoadMore';
+import NoResults  from './NoResults';
 
 class ArtistsPanel extends React.Component {
   constructor() {
@@ -51,37 +52,50 @@ class ArtistsPanel extends React.Component {
     this.handleFetch(searchText,newSearch);
   }
 
-  render() {
-    const { searchText, artists, total, fetching } = this.state;
-
-    let response;
+  loading(){
+    let response = null;
     if (this.state.fetching) {
       response = (<Loading />);
     }
-    let loadMore;
-    if (total > artists.length) {
-      loadMore = (this.state.fetching)? null:(
-        <div className="loadMoreLayout">
-          <LoadMore
-            handleLoadMoreChange={this.handleLoadMoreChange}
-            searchText={searchText}
-          />
-        </div>);
+    return response;
+  }
+
+  loadMore(total, artistsSize){
+    let loadMore=null;
+    if (artistsSize === 0) {
+      loadMore=(<NoResults fetching={this.state.fetching}/>);
     }
+    else
+      if (total > artistsSize) {
+        loadMore=(<div className="loadMoreLayout">
+                    <LoadMore
+                      fetching={this.state.fetching}
+                      handleLoadMoreChange={this.handleLoadMoreChange}
+                      searchText={this.state.searchText}
+                    />
+                  </div>);
+      }
+    return loadMore;
+  }
+
+  render() {
+    const { searchText, artists, total, fetching } = this.state;
     return (
       <div>
         <SearchInput
           searchText={searchText}
           onChange={this.handleSearchTextChange}
         />
-        {response}
+
+        {this.loading()}
+
         <ArtistsList
           artists={artists}
           artistTotal={this.state.total}
           selectedArtists={this.props.selectedArtists}
           onSelectArtist={this.props.onSelectArtist}
         />
-        {loadMore}
+        {this.loadMore(total, artists.length)}
       </div>
 
     );
