@@ -180,15 +180,11 @@ function Root() {
     <div className="root">
       <h1>Workshop: Pensando en React</h1>
       <ul className="rootList">
-        <li>
-          <Link to="/fundamentos">Ejercicios de los Fundamentos</Link>
-        </li>
+
         <li>
           <Link to="/inicio">Versión inicial (estática) de la aplicación</Link>
         </li>
-        <li>
-          <Link to="/final">Versión final de la aplicación</Link>
-        </li>
+
       </ul>
     </div>
   );
@@ -199,9 +195,7 @@ ReactDOM.render(
     ? <Final />
     : <BrowserRouter>
         <Switch>
-          <Route path="/fundamentos" component={Foundation} />
           <Route path="/inicio" component={Inicio} />
-          <Route path="/final" component={Final} />
           <Route component={Root} />
         </Switch>
       </BrowserRouter>,
