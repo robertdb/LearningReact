@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import ArtistsPanel from './components/ArtistsPanel';
-import CollectionPanel from './components/CollectionsPanel';
+import ArtistsPanel from '../components/ArtistsPanel';
+import CollectionPanel from '../components/CollectionsPanel';
 
-class App extends Component {
+class Home extends Component {
 
   constructor() {
     super();
@@ -50,4 +50,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;
